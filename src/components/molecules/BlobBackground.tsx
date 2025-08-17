@@ -23,7 +23,7 @@ const BlobBackground = () => {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 -z-[1] h-screen w-screen overflow-hidden blur-3xl"
+      className="absolute inset-0 -z-[1] h-screen overflow-hidden blur-3xl"
     >
       <Blob className="blob bg-utility-2 absolute left-10 top-10" />
       <Blob className="blob bg-primary absolute top-70 left-80" />
