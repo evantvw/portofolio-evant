@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Fira_Code } from "next/font/google";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import { useGSAP } from "@gsap/react";
 
-import gsap from "gsap";
 import "./globals.css";
 import BlobBackground from "@/components/molecules/BlobBackground";
+import Providers from "./Providers";
 
 export const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -23,8 +20,6 @@ export const metadata: Metadata = {
   description: "",
 };
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,8 +30,10 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${firaCode.variable} antialiased`}
       >
-        <BlobBackground />
-        {children}
+        <Providers>
+          <BlobBackground />
+          {children}
+        </Providers>
       </body>
     </html>
   );
