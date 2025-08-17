@@ -73,7 +73,7 @@ const Overview = () => {
   return (
     <section
       id="overview"
-      className="h-[calc(100vh-100px)] flex gap-10 items-center flex-col-reverse justify-end p-4 lg:flex-row lg:px-30 lg:py-0 invisible"
+      className="h-[90vh] flex gap-10 items-center flex-col-reverse justify-end p-4 lg:flex-row lg:px-30 lg:py-0 invisible"
     >
       {/* contents */}
       <div className="flex flex-col space-y-5 xl:flex-2 xl:justify-end">
