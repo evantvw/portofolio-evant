@@ -7,6 +7,7 @@ import { SplitText } from "gsap/all";
 import gsap from "gsap";
 import Button from "@/components/atoms/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 const Overview = () => {
   useGSAP(() => {
@@ -16,74 +17,63 @@ const Overview = () => {
       type: "chars",
     });
 
-    mainTimeline.set("#overview", { opacity: 1 });
-    mainTimeline.to("#image-container .strip", {
-      transformOrigin: "center bottom",
-      scaleY: 0,
-      duration: 1,
-      ease: "steps(5)",
-      stagger: { each: 0.1, from: "start" },
-    });
-    mainTimeline.fromTo(
-      headingSplit.chars,
-      { opacity: 0 },
-      {
-        opacity: 1,
+    mainTimeline
+      .from("#overview", { autoAlpha: 0 })
+      .to("#image-container .strip", {
+        transformOrigin: "center bottom",
+        scaleY: 0,
         duration: 1,
-        ease: "steps(1)",
-        stagger: 0.05,
-      },
-      "-=0.5"
-    );
-    mainTimeline.add(
-      [
-        sparkleTimeline.to("#sparkle-emoji", {
-          scale: 1.3,
-          rotation: 15,
-          duration: 0.4,
+        ease: "steps(5)",
+        stagger: { each: 0.1, from: "start" },
+      })
+      .from(
+        headingSplit.chars,
+        { opacity: 0, duration: 1, ease: "steps(1)", stagger: 0.05 },
+        "-=0.5"
+      )
+      .add(
+        [
+          sparkleTimeline
+            .to("#sparkle-emoji", {
+              scale: 1.3,
+              rotation: 15,
+              duration: 0.4,
+              ease: "power1.out",
+            })
+            .to("#sparkle-emoji", {
+              scale: 1,
+              rotation: 0,
+              duration: 0.8,
+              ease: "elastic.out(1, 0.3)",
+            }),
+        ],
+        "-=0.4"
+      )
+      .from(
+        "#description",
+        {
+          yPercent: 100,
+          duration: 0.5,
           ease: "power1.out",
-        }),
-        sparkleTimeline.to("#sparkle-emoji", {
-          scale: 1,
-          rotation: 0,
-          duration: 0.8,
-          ease: "elastic.out(1, 0.3)",
-        }),
-      ],
-      "-=0.4"
-    );
-    mainTimeline.fromTo(
-      "#description",
-      {
-        yPercent: 100,
-        opacity: 0,
-      },
-      {
-        yPercent: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out",
-      },
-      "-=0.4"
-    );
-    mainTimeline.fromTo(
-      "#cta",
-      {
-        yPercent: 100,
-        opacity: 0,
-      },
-      {
-        yPercent: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out",
-      }
-    );
+          opacity: 0,
+        },
+        "-=0.4"
+      )
+      .from(
+        "#cta",
+        {
+          yPercent: 100,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        "<"
+      );
   });
   return (
     <section
       id="overview"
-      className="h-[calc(100vh-100px)] flex gap-10 opacity-0 items-center flex-col-reverse justify-end p-4 lg:flex-row lg:px-30 lg:py-0"
+      className="h-[calc(100vh-100px)] flex gap-10 items-center flex-col-reverse justify-end p-4 lg:flex-row lg:px-30 lg:py-0 invisible"
     >
       {/* contents */}
       <div className="flex flex-col space-y-5 xl:flex-2 xl:justify-end">
@@ -112,7 +102,9 @@ const Overview = () => {
               text="View My Work"
               iconPosition="right"
             />
-            <Button Icon={FileDown} text="Download CV" variant="outline" />
+            <Link href={"/pdf/cv.pdf"} target="_blank" download={"evant-cv"}>
+              <Button Icon={FileDown} text="Download CV" variant="outline" />
+            </Link>
           </div>
         </div>
       </div>
@@ -120,7 +112,7 @@ const Overview = () => {
       <div className="xl:flex-1">
         <div
           id="image-container"
-          className="relative w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] xl:w-[400px] xl:h-[400px]"
+          className="relative w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] xl:w-[400px] xl:h-[400px] rounded-xl overflow-hidden"
         >
           <Image
             id="portrait"
@@ -129,7 +121,7 @@ const Overview = () => {
             fill
             sizes="100%"
             priority
-            className="absolute inset-0 w-full h-full rounded-xl object-cover grayscale"
+            className="absolute inset-0 w-full h-full object-cover grayscale"
           />
           <div className="absolute inset-0 flex z-100">
             <div className="strip h-full w-1/5 bg-cream rounded-l-xl"></div>
