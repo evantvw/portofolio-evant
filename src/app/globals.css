@@ -38,4 +38,13 @@ body {
   .cta-button {
     @apply flex gap-x-2 items-center p-3 xl:py-3 xl:px-5;
   }
+  /* .active-section {
+    @apply underline underline-offset-4 decoration-2 decoration-primary;
+  } */
+  .link-section {
+    @apply relative pb-[2px];
+  }
+  .custom-underline {
+    @apply absolute left-0 bottom-0 bg-primary h-0.5 w-full scale-x-0 origin-left;
+  }
 }
