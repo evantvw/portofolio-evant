@@ -11,8 +11,8 @@ const BlobBackground = () => {
   useGSAP(() => {
     gsap.to(".blob", {
       duration: () => gsap.utils.random(5, 10),
-      x: () => gsap.utils.random(0, containerRef.current!.clientWidth - 1000),
-      y: () => gsap.utils.random(0, containerRef.current!.clientWidth - 1000),
+      x: () => gsap.utils.random(0, containerRef.current!.clientWidth - 500),
+      y: () => gsap.utils.random(0, containerRef.current!.clientHeight - 500),
       rotation: () => gsap.utils.random(-360, 360),
       ease: "power1.inOut",
       repeat: -1,
