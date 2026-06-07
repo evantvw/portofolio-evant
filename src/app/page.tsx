@@ -3,6 +3,8 @@
 import Navbar from "@/components/organisms/Navbar";
 import Overview from "./_components/Overview";
 import AboutMe from "./_components/AboutMe";
+import Experience from "./_components/Experience";
+import Contact from "./_components/Contact";
 
 import { useEffect, useState } from "react";
 
@@ -19,22 +21,19 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.6 }
+      { threshold: 0.3 }
     );
     sections.forEach((s) => observer.observe(s));
     return () => sections.forEach((s) => observer.unobserve(s));
   }, []);
+
   return (
     <main>
-      {/* navbar */}
       <Navbar active={active} />
-      {/* hero */}
       <Overview />
-      {/* tech stacks */}
       <AboutMe />
-      {/* experience */}
-      {/* projects company
-      contact */}
+      <Experience />
+      <Contact />
     </main>
   );
 }

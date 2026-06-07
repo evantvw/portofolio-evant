@@ -4,8 +4,18 @@
   --background: #f4f1e6;
   --foreground: #4c3d39;
   --primary: #f0bc68;
+  --primary-fg: #8a5700; /* dark amber — 4.87:1 on cream, for text/icons on light bg */
   --utility: #689cf0;
   --utility-2: #e58d8d;
+}
+
+.dark {
+  --background: #181412;
+  --foreground: #ede6d6;
+  --primary: #f0bc68;
+  --primary-fg: #f0bc68; /* bright gold passes on dark bg (~7.8:1) */
+  --utility: #7aabf5;
+  --utility-2: #e89898;
 }
 
 @theme inline {
@@ -14,37 +24,63 @@
   --font-sans: var(--font-space-grotesk);
   --font-serif: var(--font-fira-code);
   --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
   --color-cream: var(--background);
   --color-utility: var(--utility);
   --color-utility-2: var(--utility-2);
 }
-/* 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 @layer components {
   .highlight {
-    @apply text-primary font-semibold text-shadow-sm;
+    @apply text-primary-fg font-semibold;
   }
   .cta-button {
     @apply flex gap-x-2 items-center p-3 xl:py-3 xl:px-5;
   }
-  /* .active-section {
-    @apply underline underline-offset-4 decoration-2 decoration-primary;
-  } */
   .link-section {
     @apply relative pb-[2px];
   }
   .custom-underline {
     @apply absolute left-0 bottom-0 bg-primary h-0.5 w-full scale-x-0 origin-left;
+  }
+  .section-label {
+    @apply font-serif text-primary-fg text-xs font-semibold tracking-widest uppercase mb-3;
+  }
+  .section-heading {
+    @apply font-sans font-bold text-3xl md:text-4xl xl:text-5xl leading-tight;
+  }
+  .card-base {
+    @apply rounded-2xl border border-foreground/10 bg-foreground/[0.025] hover:bg-foreground/[0.05] transition-colors duration-300;
   }
 }

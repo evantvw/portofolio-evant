@@ -5,19 +5,20 @@ import "./globals.css";
 import BlobBackground from "@/components/molecules/BlobBackground";
 import Providers from "./Providers";
 
-export const spaceGrotesk = Space_Grotesk({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
-export const firaCode = Fira_Code({
+const firaCode = Fira_Code({
   variable: "--font-fira-code",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Portofolio Evant",
-  description: "",
+  title: "Evant — Front-End Developer",
+  description:
+    "Portfolio of Evant Valery, a front-end developer specializing in animation, design systems, and high-performance web experiences.",
 };
 
 export default function RootLayout({
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${spaceGrotesk.variable} ${firaCode.variable} antialiased`}
       >
